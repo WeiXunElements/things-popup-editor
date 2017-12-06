@@ -35,16 +35,15 @@ Copyright © HatioLab Inc. All rights reserved.
       }      
     </style>
 
-    <things-combo
-      except-empty
-      id="format-combo"
-      label="[[comboLabel]]"
-      label-path="name"
-      value-path="mode"
-      items="[[availEditorMode]]">
-    </things-combo>
-
     <div id="container">
+      <things-combo
+        id="format-combo"
+        label="[[comboLabel]]"
+        label-path="name"
+        value-path="mode"
+        items="[[availEditorMode]]"
+        except-empty>
+      </things-combo>
 
       <things-editor-script
         id="editor"
@@ -65,6 +64,13 @@ Copyright © HatioLab Inc. All rights reserved.
       is: 'things-popup-editor',
 
       properties: {
+        comboLabel: {
+          type: String,
+          value: function() {
+            return Things.DataGlobal.t('label.type');
+          }
+        },
+
         /**
          * Editor value
          */

@@ -1,8 +1,8 @@
 {
   "name": "things-popup-editor",
-  "version": "v2.0.1",
+  "version": "v2.0.2",
   "authors": [
-    "Hatio Lab.  <heartyoh@hatiolab.com>"
+    "Shenzhen Weixun"
   ],
   "description": "그리드의 팝업 코드 에디터 컴퍼넌트",
   "keywords": [
@@ -11,8 +11,6 @@
     "seed"
   ],
   "main": "elements.html",
-  "license": "http://license.hatiolab.com/EULA",
-  "homepage": "http://elements.hatiolab.com/",
   "ignore": [
     "/.*",
     "/test/"

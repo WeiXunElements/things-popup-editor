@@ -1,38 +1,38 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../paper-toolbar/paper-toolbar.html" />
 
-<link rel="import" href="../things-combo/things-combo.html">
-<link rel="import" href="../things-code-editor/things-editor-script.html">
-<link rel="import" href="../things-button/things-button-bar.html">
+<link rel="import" href="../things-combo/things-combo.html" />
+<link rel="import" href="../things-code-editor/things-editor-script.html" />
+<link rel="import" href="../things-button/things-button-bar.html" />
 
 <dom-module id="things-popup-editor">
   <template>
     <style>
       :host {
         display: block;
-        @apply(--layout-vertical);
-        @apply(--layout-flex);
+        @apply (--layout-vertical);
+        @apply (--layout-flex);
       }
       #container {
-        @apply(--layout-vertical);
-        @apply(--layout-flex);
+        @apply (--layout-vertical);
+        @apply (--layout-flex);
         padding: 15px;
       }
       paper-toolbar {
-        background-color:var(--things-white-background-color);
+        background-color: var(--things-white-background-color);
         height: 50px;
       }
       paper-toolbar::shadow #bottomBar {
         height: 50px;
-        @apply(--layout-horizontal);
-        @apply(--layout-end-justified);
+        @apply (--layout-horizontal);
+        @apply (--layout-end-justified);
         padding: 0 10px;
-      }      
+      }
     </style>
 
     <div id="container">
@@ -42,15 +42,11 @@ Copyright © HatioLab Inc. All rights reserved.
         label-path="name"
         value-path="mode"
         items="[[availEditorMode]]"
-        except-empty>
+        except-empty
+      >
       </things-combo>
 
-      <things-editor-script
-        id="editor"
-        theme="ace/theme/monokai"
-        value="{{value}}"
-        wrapmode>
-      </things-editor-script>
+      <things-editor-script id="editor" theme="ace/theme/monokai" value="{{value}}" wrapmode> </things-editor-script>
 
       <paper-toolbar>
         <div class="bottom">
@@ -66,9 +62,9 @@ Copyright © HatioLab Inc. All rights reserved.
       properties: {
         comboLabel: {
           type: String,
-          value: function() {
+          value: function () {
             return Things.DataGlobal.t('label.type');
-          }
+          },
         },
 
         /**
@@ -77,7 +73,7 @@ Copyright © HatioLab Inc. All rights reserved.
         value: {
           type: String,
           notify: true,
-          observer: '_valueChanged'
+          observer: '_valueChanged',
         },
 
         /**
@@ -85,18 +81,18 @@ Copyright © HatioLab Inc. All rights reserved.
          * 기본 값을 things-grid-config-behavior에서 정의함
          */
         confirmCallback: {
-          type: Object
+          type: Object,
         },
 
         /**
          * @description
-         * 그리드 구성시 things-grid-meta-behavior에서 metaData.grid_format을 통해 초기 포멧 형식을 정의함 
+         * 그리드 구성시 things-grid-meta-behavior에서 metaData.grid_format을 통해 초기 포멧 형식을 정의함
          * editorMode attribute의 값이 있으면 editor의 포멧 형식이 정해진 것으로 간주하여
          * 포멧 설정을 위한 combo box를 hidden 처리함
          */
         editorMode: {
           type: String,
-          observer: '_editorModeChanged'
+          observer: '_editorModeChanged',
         },
 
         /**
@@ -105,12 +101,14 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         buttons: {
           type: Array,
-          value: function() {
-            return [{
-              id: 'confirm-btn',
-              text: 'confirm'
-            }]
-          }
+          value: function () {
+            return [
+              {
+                id: 'confirm-btn',
+                text: 'confirm',
+              },
+            ];
+          },
         },
 
         /**
@@ -119,43 +117,53 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         availEditorMode: {
           type: Array,
-          value: function() {
-            return [{
-              name: 'Text',
-              mode: 'ace/mode/text'
-            }, {
-              name: 'JSON',
-              mode: 'ace/mode/json'
-            }, {
-              name: 'Java',
-              mode: 'ace/mode/java'
-            }, {
-              name: 'Javascript',
-              mode: 'ace/mode/javascript'
-            }, {
-              name: 'Shell',
-              mode: 'ace/mode/sh'
-            }, {
-              name: 'SQL',
-              mode: 'ace/mode/sql'
-            }, {
-              name: 'Groovy',
-              mode: 'ace/mode/groovy'
-            }, {
-              name: 'HTML',
-              mode: 'ace/mode/html'
-            }, {
-              name: 'XML',
-              mode: 'ace/mode/xml'
-            }]
-          }
-        }
+          value: function () {
+            return [
+              {
+                name: 'Text',
+                mode: 'ace/mode/text',
+              },
+              {
+                name: 'JSON',
+                mode: 'ace/mode/json',
+              },
+              {
+                name: 'Java',
+                mode: 'ace/mode/java',
+              },
+              {
+                name: 'Javascript',
+                mode: 'ace/mode/javascript',
+              },
+              {
+                name: 'Shell',
+                mode: 'ace/mode/sh',
+              },
+              {
+                name: 'SQL',
+                mode: 'ace/mode/sql',
+              },
+              {
+                name: 'Groovy',
+                mode: 'ace/mode/groovy',
+              },
+              {
+                name: 'HTML',
+                mode: 'ace/mode/html',
+              },
+              {
+                name: 'XML',
+                mode: 'ace/mode/xml',
+              },
+            ];
+          },
+        },
       },
 
       listeners: {
         'editor.editor-ready': '_onEditorReady',
         'button-group.confirm-btn-tap': '_confirmBtnTapped',
-        'format-combo.things-combo-value-changed': '_formatSelected'
+        'format-combo.things-combo-value-changed': '_formatSelected',
       },
 
       /**
@@ -165,18 +173,18 @@ Copyright © HatioLab Inc. All rights reserved.
        * 2. format-combo hidden 처리
        * 3. _adjustEditorFormat을 호출하여 editor의 format을 적용함
        */
-      _editorModeChanged: function(editorMode) {
-        if(!editorMode) return;
+      _editorModeChanged: function (editorMode) {
+        if (!editorMode) return;
 
         var matchedEditorMode;
 
-        for(var i = 0; i < this.availEditorMode.length; i++) {
-          if(this.availEditorMode[i].mode.indexOf(editorMode.toLowerCase()) > 0) {
+        for (var i = 0; i < this.availEditorMode.length; i++) {
+          if (this.availEditorMode[i].mode.indexOf(editorMode.toLowerCase()) > 0) {
             this.$['format-combo'].setAttribute('hidden', true);
             this._adjustEditorFormat(this.availEditorMode[i].mode);
             break;
           }
-        };       
+        }
       },
 
       /**
@@ -184,25 +192,25 @@ Copyright © HatioLab Inc. All rights reserved.
        * things-combo things-combo-value-changed event handler
        * 콤보 박스의 값이 변경되면 해당 값을 인자로 _adjustEditorFormat을 호출함
        */
-      _formatSelected: function(event) {
-        this._adjustEditorFormat(event.detail.value)
+      _formatSelected: function (event) {
+        this._adjustEditorFormat(event.detail.value);
       },
 
       /**
        * @param format editor format type
        * format을 통해 editor의 mode를 설정함
        */
-      _adjustEditorFormat: function(format) {
+      _adjustEditorFormat: function (format) {
         this.$['editor'].editor.getSession().setMode(format);
       },
 
       /**
        * editor의 값이 변경될 때 호출되며 things-popup-editor-value-changed 이벤트를 발생시킴
        */
-      _valueChanged: function(value) {
+      _valueChanged: function (value) {
         var event = this.fire('things-popup-editor-value-changed', {
           editor: this,
-          value: value
+          value: value,
         });
       },
 
@@ -211,24 +219,24 @@ Copyright © HatioLab Inc. All rights reserved.
        * 1. things-popup-editor-confirm 이벤트를 발생시키고
        * 2. 기본적으로 confirmCallback을 실행함 (confirmCallback은 things-grid-config-behavior에서 정의함)
        */
-      _confirmBtnTapped: function() {
+      _confirmBtnTapped: function () {
         var event = this.fire('things-popup-editor-confirm', { value: this.value }, { cancelable: true });
 
-        if(!event.defaultPrevented) {
-          if(this.confirmCallback) this.confirmCallback();
+        if (!event.defaultPrevented) {
+          if (this.confirmCallback) this.confirmCallback();
           this.fire('things-dialog-close');
-        };
+        }
       },
 
       /**
        * popup dialog open callback
        * things-popup-editor-opened 이벤트를 발생시킴
        */
-      _openCallback: function(grid, index) {
+      _openCallback: function (grid, index) {
         this.fire('things-popup-editor-opened', {
           editor: this,
           grid: grid,
-          index: index
+          index: index,
         });
       },
 
@@ -236,20 +244,20 @@ Copyright © HatioLab Inc. All rights reserved.
        * popup dialog close callback
        * things-popup-editor-closed 이벤트를 발생시킴
        */
-      _closeCallback: function(grid, index) {
+      _closeCallback: function (grid, index) {
         this.fire('things-popup-editor-closed', {
           editor: this,
           grid: grid,
-          index: index
+          index: index,
         });
       },
 
       /**
        * editor가 로드된 후 수행하는 작업
        */
-      _onEditorReady: function(event) {
-        event.detail.renderer.setShowGutter(false);  
-      }
-    })
+      _onEditorReady: function (event) {
+        event.detail.renderer.setShowGutter(false);
+      },
+    });
   </script>
 </dom-module>

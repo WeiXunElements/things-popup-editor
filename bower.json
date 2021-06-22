@@ -1,6 +1,6 @@
 {
   "name": "things-popup-editor",
-  "version": "v2.0.2",
+  "version": "v2.0.3",
   "authors": [
     "Shenzhen Weixun"
   ],
@@ -18,9 +18,9 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
     "paper-toolbar": "^1.1.4",
-    "things-combo": "ThingsElements/things-combo",
-    "things-code-editor": "ThingsElements/things-code-editor",
-    "things-button": "ThingsElements/things-button"
+    "things-combo": "WeiXunElements/things-combo",
+    "things-code-editor": "WeiXunElements/things-code-editor",
+    "things-button": "WeiXunElements/things-button"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
